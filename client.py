@@ -127,21 +127,6 @@ class MCPClient:
             }
         ]
 
-        response = await self.session.list_tools()
-        available_tools = [{
-            "name": tool.name,
-            "description": tool.description,
-            "input_schema": tool.inputSchema
-        } for tool in response.tools]
-
-        # Initial Claude API call
-        response = self.anthropic.messages.create(
-            model="claude-3-5-sonnet-20241022",
-            max_tokens=1000,
-            messages=messages,
-            tools=available_tools
-        )
-
         all_tools = []
         server_tool_map = {}
 
